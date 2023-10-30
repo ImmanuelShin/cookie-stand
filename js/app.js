@@ -11,6 +11,7 @@ function getStores() {
   const paris = new Store('Paris', '6am - 7pm', '444-444-4444', 'Champ de Mars, 5 Avenue Anatole France, 75007 Paris', 20, 38, 2.3);
   const lima = new Store('Lima', '6am - 7pm', '555-555-5555', 'Ca. Gral. Borgoño cuadra 8, Miraflores 15074)', 2, 16, 4.6);
 
+  // Added print stores here temporarily for ease of use.
   printStores(seattle);
   printStores(tokyo);
   printStores(dubai);
@@ -23,7 +24,6 @@ function printStores(store) {
   let storeSection = getID('storeSales');
   let section = document.createElement('section');
   section.setAttribute('class', 'store');
-  console.log(section);
   storeSection.append(section);
   let h2 = document.createElement('h2');
   h2.textContent = store.name;
@@ -42,7 +42,10 @@ function printStores(store) {
     index += 1;
     ul.append(li);
   }
-  
+  let total = document.createElement('li');
+  let subTotal = store.cookies.reduce((acc, c) => acc + c, 0);
+  total.textContent = 'Total: ' + subTotal + ' cookies';
+  ul.append(total);
 }
 
 
