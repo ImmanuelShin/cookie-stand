@@ -34,17 +34,48 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 }
 
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+#bigFish {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    border-bottom: solid thin black;
+}
+
+#bigFish img {
+    max-height: 25vh;
+}
+
 .store {
     padding: 1em 2em 1em 3em;
 }
 
+.store ul {
+    margin-top: 0.5em;
+}
+
 .store li {
     font-family: Arial, Helvetica, sans-serif;
-    padding-left: 1em;
+    padding-left: 2em;
+    margin-top: 0.5em;
 }
 
 footer {
     background-color: lightgray;
     text-align: center;
     padding: 3em;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
