@@ -68,7 +68,7 @@ function loadStoreInfo() {
   printStoreInfo(lima);
 }
 
-// Function to print all store sales. Called on sales.html load
+// Function to append all store sales info to table.
 function loadStoreSales() {
   printStoreSales(seattle);
   printStoreSales(tokyo);
@@ -77,16 +77,23 @@ function loadStoreSales() {
   printStoreSales(lima);
 }
 
-// 
+// Adds table columns together to get total daily values.
 function getTableTotals() {
   let table = getID('saleTable');
-  let row = getID('tHRE');
-  
-  for (let x = 1; x < table.rows.cells; x++) {
+  let row = getID('tRHE');
+  console.log('test');
+  for (let x = 1; x < table.rows[0].cells.length; x++) {
+    console.log(table.rows[0].cells.length);
     let tH = cEl('th');
     let total = 0;
-    for (let i = 1; i < table.rows.length; i++)
-
+    for (let i = 1; i < (table.rows.length - 1); i++){
+      let number = table.rows[i].cells[x].childNodes.item(0).data;
+      console.log((number));
+      total += Number(number);
+    }
+    console.log(total);
+    tH.textContent = total;
+    row.appendChild(tH);
   }
 }
 
@@ -159,14 +166,14 @@ function Store(name, hours, contact, address, min, max, average) {
 // Get # of cookies. Generates a random number of customers and multiplies them by average cookies per customer.
 function getCookies(hour, min, max, average) {
   if (hour < 10) {
-    let minMax = Math.floor(min * (Math.random() + 1));
-    return Math.floor(Math.floor(Math.random() * (minMax - min) + min) * average);
+    let minMax = Math.ceil(min * (Math.random() + 1));
+    return Math.ceil(Math.ceil(Math.random() * (minMax - min) + min) * average);
   } else if (hour < 15) {
-    let maxMin = Math.floor(max * ((Math.random() * 0.25) + 0.75));
-    return Math.floor(Math.floor(Math.random() * (max - maxMin) + maxMin) * average);
+    let maxMin = Math.ceil(max * ((Math.random() * 0.25) + 0.75));
+    return Math.ceil(Math.ceil(Math.random() * (max - maxMin) + maxMin) * average);
   } else {
-    let maxMinEnd = Math.floor(max * ((Math.random() * 0.33) + 0.33));
-    return Math.floor(Math.floor(Math.random() * (max - maxMinEnd) + min) * average);
+    let maxMinEnd = Math.ceil(max * ((Math.random() * 0.33) + 0.33));
+    return Math.ceil(Math.ceil(Math.random() * (max - maxMinEnd) + min) * average);
   }
 }
 
