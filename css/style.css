@@ -2,6 +2,10 @@ html {
     background-color: white;
 }
 
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 header {
     background-color: black;
     color: salmon;
@@ -78,6 +82,24 @@ h3 {
     font-family: Arial, Helvetica, sans-serif;
     padding-left: 2em;
     margin-top: 0.5em;
+}
+
+#tableSection {
+    margin: 5vh;
+}
+
+table th {
+    background-color: gray;
+    color: white;
+}
+
+table td {
+    background-color: salmon;
+    border: thin solid black;
+}
+
+table th, table td {
+    padding: 0.5em 1em 0.5em 1em;
 }
 
 footer {

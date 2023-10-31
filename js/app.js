@@ -7,6 +7,58 @@ const dubai = new Store('Dubai', '6am - 7pm', '333-333-3333', '1 Sheikh Mohammed
 const paris = new Store('Paris', '6am - 7pm', '444-444-4444', 'Champ de Mars, 5 Avenue Anatole France, 75007 Paris', 20, 38, 2.3);
 const lima = new Store('Lima', '6am - 7pm', '555-555-5555', 'Ca. Gral. Borgoño cuadra 8, Miraflores 15074)', 2, 16, 4.6);
 
+
+// Run tables
+function runTables() {
+  createTable();
+  loadStoreSales();
+  getTableTotals();
+}
+
+// Create base table
+function createTable() {
+  let storeSales = getID('storeSales');
+  let section = cEl('section');
+  section.setAttribute('id', 'tableSection');
+  storeSales.append(section);
+
+  let table = cEl('table');
+  table.setAttribute('id', 'saleTable');
+  section.append(table);
+
+  let tRH = cEl('tr');
+  tRH.setAttribute('id', 'firstRow');
+  table.appendChild(tRH);
+
+  let tHLocation = cEl('th');
+  tHLocation.textContent = 'Locations';
+  tRH.appendChild(tHLocation);
+
+  for (let x = 6; x <= 19; x++) {
+    let tH = cEl('th');
+    if (x < 13) {
+      tH.textContent = (x) + ':00am';
+    } else {
+      tH.textContent = (x - 12) + ':00pm';
+    }
+    tRH.appendChild(tH);
+  }
+
+  let tHTotal = cEl('th');
+  tHTotal.textContent = 'Location Totals';
+  tRH.appendChild(tHTotal);
+
+  // Table row header end
+  let tRHE = cEl('tr');
+  tRHE.setAttribute('id', 'tRHE');
+  table.appendChild(tRHE);
+
+  let tHLocationEnd = cEl('th');
+  tHLocationEnd.textContent = 'Hourly Totals for All Locations';
+  tRHE.appendChild(tHLocationEnd);
+}
+
+
 // Function to print all store info. Called on index.html load
 function loadStoreInfo() {
   printStoreInfo(seattle);
@@ -23,6 +75,19 @@ function loadStoreSales() {
   printStoreSales(dubai);
   printStoreSales(paris);
   printStoreSales(lima);
+}
+
+// 
+function getTableTotals() {
+  let table = getID('saleTable');
+  let row = getID('tHRE');
+  
+  for (let x = 1; x < table.rows.cells; x++) {
+    let tH = cEl('th');
+    let total = 0;
+    for (let i = 1; i < table.rows.length; i++)
+
+  }
 }
 
 // Prints store information
@@ -55,38 +120,25 @@ function printStoreInfo(store) {
 
 // Prints store sales info
 function printStoreSales(store) {
-  let storeSection = getID('storeSales');
+  let table = getID('saleTable');
 
-  let section = cEl('section');
-  section.setAttribute('class', 'storeSale');
-  storeSection.append(section);
+  let lastRowIndex = table.rows.length;
+  let row = table.insertRow(lastRowIndex - 1);
+  row.setAttribute('id', store.name);
 
-  let h2 = cEl('h2');
-  h2.textContent = store.name;
-  section.append(h2);
+  let tdName = cEl('td');
+  tdName.textContent = store.name;
+  row.appendChild(tdName);
 
-  let ul = cEl('ul');
-  section.append(ul);
-
-  let index = 0;
   for (let x of store.cookies) {
-    let li = cEl('li');
-    if (index < 7) {
-      li.textContent = (index + 6) + 'am: ' + x + ' cookies';
-    } else {
-      li.textContent = (index - 6) + 'pm: ' + x + ' cookies';
-    }
-    index += 1;
-    ul.append(li);
+    let tdCookie = cEl('td');
+    tdCookie.textContent = x;
+    row.appendChild(tdCookie);
   }
-  let total = cEl('li');
-  let subTotal = store.cookies.reduce((acc, c) => acc + c, 0);
-  total.textContent = 'Total: ' + subTotal + ' cookies';
-  ul.append(total);
+  let total = cEl('th');
+  total.textContent = store.cookies.reduce((acc, c) => acc + c, 0);
+  row.appendChild(total);
 }
-
-
-
 
 // Store object constructor
 function Store(name, hours, contact, address, min, max, average) {
@@ -102,7 +154,6 @@ function Store(name, hours, contact, address, min, max, average) {
     cookies[x-6] = getCookies(x, this.minCus, this.maxCus, this.cookiePer);
   }
   this.cookies = cookies;
-  this.average = Math.floor(cookies.reduce((acc, c) => acc + c, 0) / cookies.length);
 }
 
 // Get # of cookies. Generates a random number of customers and multiplies them by average cookies per customer.
@@ -118,10 +169,6 @@ function getCookies(hour, min, max, average) {
     return Math.floor(Math.floor(Math.random() * (max - maxMinEnd) + min) * average);
   }
 }
-
-
-
-
 
 // Repetitive get ID function
 function getID(element) {
