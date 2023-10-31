@@ -70,15 +70,11 @@ h3 {
     padding: 1em;
 }
 
-.storeSale, .storeInformation {
+.storeInformation {
     padding: 1em 2em 1em 3em;
 }
 
-.storeSale ul {
-    margin-top: 0.5em;
-}
-
-.storeSale li, .storeInformation li {
+.storeInformation li {
     font-family: Arial, Helvetica, sans-serif;
     padding-left: 2em;
     margin-top: 0.5em;
@@ -88,9 +84,14 @@ h3 {
     margin: 5vh;
 }
 
+table {
+    margin: auto;
+}
+
 table th {
     background-color: gray;
     color: white;
+    text-align: center;
 }
 
 table td {
