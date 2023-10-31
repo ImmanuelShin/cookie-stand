@@ -91,6 +91,7 @@ h3 {
 
 table {
     margin: auto;
+    border: thin solid black;
 }
 
 table th {
