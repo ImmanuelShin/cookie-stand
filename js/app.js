@@ -11,17 +11,22 @@ const storeArray = [seattle, tokyo, dubai, paris, lima];
 
 // Run tables
 function runTables() {
-  createTable();
+  createSalesTable();
+  createStaffTable();
   renderStores();
   getTableTotals();
 }
 
-// Create base table
-function createTable() {
-  const storeSales = getID('storeSales');
+// Create base sales table
+function createSalesTable() {
+  const article = getID('tables');
   const section = cEl('section');
-  section.setAttribute('id', 'tableSection');
-  storeSales.append(section);
+  section.setAttribute('class', 'tableSection');
+  article.append(section);
+
+  const header = cEl('h2');
+  header.textContent = 'Hourly Cookie Sales';
+  section.append(header);
 
   const table = cEl('table');
   table.setAttribute('id', 'saleTable');
@@ -59,6 +64,41 @@ function createTable() {
   tRHE.appendChild(tHLocationEnd);
 }
 
+// Create base staff table. Largely redundant, but too lazy to make generic.
+function createStaffTable() {
+  const article = getID('tables');
+  const section = cEl('section');
+  section.setAttribute('class', 'tableSection');
+  article.append(section);
+
+  const header = cEl('h2');
+  header.textContent = 'Minimum Staff';
+  section.append(header);
+
+  const table = cEl('table');
+  table.setAttribute('id', 'staffTable');
+  section.append(table);
+
+  const tRH = cEl('tr');
+  tRH.setAttribute('id', 'firstRow');
+  table.appendChild(tRH);
+
+  const tHLocation = cEl('th');
+  tHLocation.textContent = 'Locations';
+  tRH.appendChild(tHLocation);
+
+  for (let x = 6; x <= 19; x++) {
+    let tH = cEl('th');
+    if (x < 13) {
+      tH.textContent = (x) + ':00am';
+    } else {
+      tH.textContent = (x - 12) + ':00pm';
+    }
+    tRH.appendChild(tH);
+  }
+}
+
+
 
 // Function to print all store info. Called on index.html load
 function informStores() {
@@ -70,7 +110,8 @@ function informStores() {
 // Calls render method for all stores. Essentially prints store info to table.
 function renderStores() {
   for (let x of storeArray) {
-    x.render();
+    x.renderSales();
+    x.renderStaff();
   }
 }
 
@@ -104,12 +145,11 @@ function Store(name, hours, contact, address, min, max, average) {
 }
 
 // Method to append store sales onto table.
-Store.prototype.render = function() {
+Store.prototype.renderSales = function() {
   const table = getID('saleTable');
 
   const lastRowIndex = table.rows.length;
   const row = table.insertRow(lastRowIndex - 1);
-  row.setAttribute('id', this.name);
 
   const tdName = cEl('td');
   tdName.textContent = this.name;
@@ -123,6 +163,24 @@ Store.prototype.render = function() {
   const total = cEl('th');
   total.textContent = this.cookies.reduce((acc, c) => acc + c, 0);
   row.appendChild(total);
+};
+
+// Method to append store staff onto table.
+Store.prototype.renderStaff = function() {
+  const table = getID('staffTable');
+
+  const lastRowIndex = table.rows.length;
+  const row = table.insertRow(lastRowIndex);
+
+  const tdName = cEl('td');
+  tdName.textContent = this.name;
+  row.appendChild(tdName);
+
+  for (let x of this.staff) {
+    const tdStaff = cEl('td');
+    tdStaff.textContent = x;
+    row.appendChild(tdStaff);
+  }
 };
 
 // Method to print store information onto index.html page
@@ -153,9 +211,11 @@ Store.prototype.inform = function() {
   ul.append(liLocation);
 };
 
+
+
 // Get # of cookies. Generates a random number of customers and multiplies them by average cookies per customer.
 function getCookies(max, average) {
-  const traffic = [0.5, 0.75, 1.0, 0.6, 0.8, 1.0, 0.7, 0.4, 0.6, 0.9, 0.7, 0.5, 0.3, 0.4, 0.6];
+  const traffic = [0.5, 0.75, 1.0, 0.6, 0.8, 1.0, 0.7, 0.4, 0.6, 0.9, 0.7, 0.5, 0.3, 0.4];
   const cookies = [];
   for (let x = 0; x <= 13; x++) {
     cookies[x] = Math.ceil(max * traffic[x] * average);
@@ -164,7 +224,7 @@ function getCookies(max, average) {
 }
 
 function getStaff(max) {
-  const traffic = [0.5, 0.75, 1.0, 0.6, 0.8, 1.0, 0.7, 0.4, 0.6, 0.9, 0.7, 0.5, 0.3, 0.4, 0.6];
+  const traffic = [0.5, 0.75, 1.0, 0.6, 0.8, 1.0, 0.7, 0.4, 0.6, 0.9, 0.7, 0.5, 0.3, 0.4];
   const staff = [];
   let i = 0;
   for (let x of traffic) {
