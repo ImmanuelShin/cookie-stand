@@ -12,35 +12,39 @@
     <header>
         <h1>Welcome to Pat's Salmon Cookies!</h1>
     </header>
-    <nav>
-        <ul>
-            <li>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider"></span>
-                </label>
-            </li>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="sales.html">Sales Data</a></li>
-            <li><a href="store.html">Order</a></li>
-        </ul>
-    </nav>
-    <article id="orderForm">
-        <form action="order-processing.html">
-            <label for="orderName">Name:</label><br>
-            <input type="text" id="orderName" name="OrderName" value="Your name"><br>
-            <label for="orderAddress">Address:</label><br>
-            <input type="text" id="orderAddress" name="orderAddress"><br>
-            <label for="orderPayment">Name:</label><br>
-            <input type="text" id="orderPayment" name="orderPayment"><br>
-            <label for="orderName">Name:</label><br>
-            <input type="text" id="OrderName" name="OrderName"><br>
-            <label for="orderName">Name:</label><br>
-            <input type="text" id="OrderName" name="OrderName"><br>
-            <label for="orderName">Name:</label><br>
-            <input type="text" id="OrderName" name="OrderName"><br>
-        </form>
-    </article>
+    <main>
+        <nav>
+            <ul>
+                <li>
+                    <label class="switch">
+                        <input type="checkbox" id="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sales.html">Sales Data</a></li>
+                <li><a href="store.html">Order</a></li>
+            </ul>
+        </nav>
+        <article id="orderForm">
+            <h3>Order Here</h3>
+            <form>
+                <fieldset>
+                    <label for="orderName">Name</label><br>
+                    <input type="text" id="orderName" name="OrderName"><br>
+                    <label for="orderAddress">Address</label><br>
+                    <input type="text" id="orderAddress" name="orderAddress"><br>
+                    <label for="orderProduct">Product</label><br>
+                    <input type="text" id="orderProduct" name="orderProduct"><br>
+                    <label for="orderAmount">Amount</label><br>
+                    <input type="text" id="orderAmount" name="orderAmount"><br>
+                    <label for="orderSpecial">Special Instructions</label><br>
+                    <input type="text" id="orderSpecial" name="orderSpecial"><br>
+
+                </fieldset>
+            </form>
+        </article>
+    </main>
     <footer>
         <p>&copy; 2023 Pat's Salmon Cookies</p>
     </footer>
