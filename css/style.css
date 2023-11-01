@@ -22,6 +22,7 @@ nav {
 
 nav ul {
     list-style: none;
+    display: flex;
 }
 
 nav li {
@@ -36,6 +37,55 @@ a:link {
 
 a:visited {
     color: black;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 2em;
+    height: 1em;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #6e6e6e;
+    border-radius: 1em;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 0.5em;
+    width: 0.75em;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 1em;
+}
+
+input:checked + .slider {
+    background-color: black;
+}
+
+input:focused + .slider {
+    box-shadow: 0 0 2px black;
+}
+
+input:checked + .slider:before {
+    transform: translateX(0.75em);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -56,7 +106,6 @@ h3 {
 }
 
 #bigFish {
-    background-color: white;
     display: flex;
     justify-content: center;
     border-bottom: solid thin black;
@@ -103,6 +152,7 @@ table th {
 table td {
     background-color: salmon;
     border: thin solid black;
+    color: black;
 }
 
 table th, table td {
