@@ -9,6 +9,40 @@ const lima = new Store('Lima', '6am - 7pm', '555-555-5555', 'Ca. Gral. Borgoño 
 
 const storeArray = [seattle, tokyo, dubai, paris, lima];
 
+// Function to contain light dark switcher
+// Sets up event listener for check box
+// Changes states if check box is checked and keeps checked information in local storage
+// Calls updateColors at all points to ensure state synced across pages.
+function lightDark() {
+  const checkbox = getID('checkbox');
+
+  checkbox.addEventListener('change', function() {
+    localStorage.setItem('checkboxStatus', checkbox.checked);
+    updateColors();
+  });
+
+  // Set initial checkbox state
+  const storedCheckboxStatus = localStorage.getItem('checkboxStatus');
+  if (storedCheckboxStatus) {
+    checkbox.checked = JSON.parse(storedCheckboxStatus);
+    updateColors();
+  }
+}
+
+// Function to update specified colors based on checkbox state
+function updateColors() {
+  const checkbox = getID('checkbox');
+  const body = document.body;
+
+  if (checkbox.checked) {
+    body.style.backgroundColor = 'black';
+    body.style.color = 'white';
+  } else {
+    body.style.backgroundColor = 'white';
+    body.style.color = 'black';
+  }
+}
+
 // Run tables
 function runTables() {
   createSalesTable();
@@ -248,3 +282,6 @@ function getID(element) {
 function cEl(element) {
   return document.createElement(element);
 }
+
+// Last calls
+lightDark();
