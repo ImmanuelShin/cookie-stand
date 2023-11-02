@@ -16,7 +16,6 @@ header {
 nav {
     background-color: salmon;
     color: black;
-    padding: 1em;
     text-align: left;
 }
 
@@ -26,8 +25,13 @@ nav ul {
 }
 
 nav li {
-    display: inline-block;
-    padding: 0 1em 0 1em;
+    padding: 1em;
+    border-radius: 1em;
+    transition: background-color 350ms
+}
+
+nav li:hover {
+    background-color: rgb(228, 115, 103);
 }
 
 a:link {
@@ -86,6 +90,10 @@ input:focused + .slider {
 
 input:checked + .slider:before {
     transform: translateX(0.75em);
+}
+
+main {
+    height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -159,8 +167,45 @@ table th, table td {
     padding: 0.5em 1em 0.5em 1em;
 }
 
+#orderFormArticle {
+    width: 50vw;
+    height: 50vh;
+    margin: auto;
+    margin-top: 15vh;
+    margin-bottom: 15vh;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    background-color: salmon;
+    border-radius: 1em;
+}
+
+#orderFormArticle img {
+    width: 50%;
+    height: 50%;
+}
+
+#orderFormArticle form {
+    padding: 10vh;
+}
+
+#orderFormArticle h3 {
+    margin: 2.5em 0 2.5em 0;
+}
+
+.formInput {
+    margin: 1em 0 1em 0;
+}
+
+#orderSubmit {
+    padding: 1em;
+    border-radius: 1em;
+    border-style: none;
+}
+
 footer {
     background-color: lightgray;
+    color: black;
     padding: 3em;
     display: flex;
     justify-content: center;
