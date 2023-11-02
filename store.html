@@ -24,23 +24,37 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="sales.html">Sales Data</a></li>
                 <li><a href="store.html">Order</a></li>
+                <li><a href="order-processing.html">Processing</a></li>
             </ul>
         </nav>
-        <article id="orderForm">
-            <h3>Order Here</h3>
-            <form>
+        <article id="orderFormArticle">
+            <img src="img/salmon.png" alt="Salmon">
+            <form id="orderForm">
+                <h3>Order Here</h3>
                 <fieldset>
-                    <label for="orderName">Name</label><br>
-                    <input type="text" id="orderName" name="OrderName"><br>
-                    <label for="orderAddress">Address</label><br>
-                    <input type="text" id="orderAddress" name="orderAddress"><br>
-                    <label for="orderProduct">Product</label><br>
-                    <input type="text" id="orderProduct" name="orderProduct"><br>
-                    <label for="orderAmount">Amount</label><br>
-                    <input type="text" id="orderAmount" name="orderAmount"><br>
-                    <label for="orderSpecial">Special Instructions</label><br>
-                    <input type="text" id="orderSpecial" name="orderSpecial"><br>
-
+                    <div class="formInput">
+                        <label for="orderName">Name</label><br>
+                        <input type="text" id="orderName" name="OrderName"><br>
+                    </div>
+                    <div class="formInput">
+                        <label for="orderAddress">Address</label><br>
+                        <input type="text" id="orderAddress" name="orderAddress"><br>
+                    </div>
+                    <div class="formInput">
+                        <label for="orderProduct">Product</label><br>
+                        <input type="text" id="orderProduct" name="orderProduct"><br>
+                    </div>
+                    <div class="formInput">
+                        <label for="orderAmount">Amount</label><br>
+                        <input type="text" id="orderAmount" name="orderAmount"><br>
+                    </div>
+                    <div class="formInput">
+                        <label for="orderSpecial">Special Instructions</label><br>
+                        <input type="text" id="orderSpecial" name="orderSpecial"><br>
+                    </div>
+                    <div class="formInput">
+                        <input type="submit" id="orderSubmit" name="orderSubmit" value="Order Now">
+                    </div>
                 </fieldset>
             </form>
         </article>
