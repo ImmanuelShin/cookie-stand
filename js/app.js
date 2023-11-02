@@ -406,7 +406,10 @@ function storeOrder(form) {
   return formArray;
 }
 
+// Keeps track of orders
+// Global for ease of access
 let organizedArray = [];
+
 // Takes array from localStorage and prints to order-processing.html
 function listOrders() {
   const ul = getID('pendingList');
@@ -445,6 +448,9 @@ function listOrders() {
   }
 }
 
+// Takes li from #pendingList and moves it to #filledList
+// Called by buttons on #pendingList
+// Updates localStorage to account for finished pending item.
 function fillOrder() {
   const fill = getID('filledList');
   const pend = getID('pendingList');
