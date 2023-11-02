@@ -137,6 +137,27 @@ h3 {
     margin-top: 0.5em;
 }
 
+#newStore {
+    display: flex;
+    justify-content: center;
+}
+
+#storeForm {
+    display: flex;
+    margin: 2vh;
+}
+
+fieldset {
+    border: thin black solid;
+    padding: 1em;
+    width: 80vw;
+}
+
+.storeFormInput {
+    display: inline;
+    padding: 1em;
+}
+
 .tableSection {
     margin: 5vh;
 }
