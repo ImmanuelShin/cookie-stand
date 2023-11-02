@@ -30,7 +30,7 @@ nav li {
     transition: background-color 350ms
 }
 
-nav li:hover {
+nav li:not(:first-child):hover {
     background-color: rgb(228, 115, 103);
 }
 
@@ -147,15 +147,21 @@ h3 {
     margin: 2vh;
 }
 
-fieldset {
+#storeForm fieldset {
     border: thin black solid;
     padding: 1em;
     width: 80vw;
+    height: 5vh;
+}
+
+#storeForm fieldset h3{
+    margin-bottom: 0.5em;
 }
 
 .storeFormInput {
     display: inline;
     padding: 1em;
+    margin-top: 1em;
 }
 
 .tableSection {
@@ -170,6 +176,7 @@ fieldset {
 table {
     margin: auto;
     border: thin solid black;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 table th {
