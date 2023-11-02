@@ -234,6 +234,17 @@ table th, table td {
     padding: 1em;
     border-radius: 1em;
     border-style: none;
+    color: white;
+    background-color: black;
+}
+
+#orderSubmit:hover {
+    background-color: rgb(41, 41, 41);
+}
+
+#orderSubmit:active {
+    margin-top: 1px;
+    margin-bottom: -1px;
 }
 
 #orderStatusArticle {
