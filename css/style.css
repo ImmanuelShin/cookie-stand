@@ -247,6 +247,22 @@ table th, table td {
     margin: 5vh;
 }
 
+#pendingList, #filledList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+#pendingList li, #filledList li {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    border: thin solid black;
+    padding: 1em;
+    margin: auto;
+}
+
 footer {
     background-color: lightgray;
     color: black;
