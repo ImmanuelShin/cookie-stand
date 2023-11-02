@@ -14,6 +14,7 @@ const storeArray = [seattle, tokyo, dubai, paris, lima];
 function orderUp() {
   const submit = getID('orderSubmit');
   const pending = getID('pendingOrders');
+  const form = getID('orderForm');
   if (submit) {
     submit.addEventListener('click', function(e) {
       e.preventDefault();
@@ -25,7 +26,7 @@ function orderUp() {
           console.log('array' + x);
         }
       }
-      storageArray.push(storeOrder());
+      storageArray.push(storeOrder(form));
       localStorage.setObj('pendingOrder', storageArray);
       // localStorage.clear();
     });
@@ -77,10 +78,86 @@ function printFunctions() {
     createStaffTable();
     renderStores();
     getTableTotals();
+    getStoreForm();
   }
   if (getID('storeInfo')){
     informStores();
   }
+}
+
+function getStoreForm() {
+  const form = getID('storeForm');
+  const submit = getID('storeSubmit');
+  submit.addEventListener('click', function(e) {
+    e.preventDefault();
+    const array = storeOrder(form);
+    const newStore = createStore(array);
+
+    const table = getID('saleTable');
+    const rows = table.rows;
+    let isIn = false;
+    let i = 0;
+    for (let x of rows) {
+      if (String(newStore.name) === String(x.cells[0].childNodes.item(0).data)) {
+        replaceStore(newStore, i);
+        isIn = true;
+        break;
+      }
+      i++;
+    }
+    if (!isIn) {
+      appendStore(newStore);
+    }
+    getTableTotals();
+  });
+}
+
+function createStore(form) {
+  console.log(form);
+  const newStore =  new Store(form[0], 'NA', 'NA', 'NA', form[1], form[2], form[3]);
+  console.log(newStore);
+  return newStore;
+}
+
+function replaceStore(store, index) {
+  const table1 = getID('saleTable');
+  const table2 = getID('staffTable');
+
+  const row1 = cEl('tr');
+  const row2 = cEl('tr');
+
+  const tD1 = cEl('td');
+  const tD2 = cEl('td');
+
+  tD1.textContent = store.name;
+  tD2.textContent = store.name;
+
+  row1.appendChild(tD1);
+  row2.appendChild(tD2);
+
+  for (let x of store.cookies) {
+    const tdCookie = cEl('td');
+    tdCookie.textContent = x;
+    row1.appendChild(tdCookie);
+  }
+
+  for (let x of store.staff) {
+    const tdStaff = cEl('td');
+    tdStaff.textContent = x;
+    row2.appendChild(tdStaff);
+  }
+
+  const total = cEl('th');
+  total.textContent = store.cookies.reduce((acc, c) => acc + c, 0);
+  row1.appendChild(total);
+
+  table1.replaceChild(row1, table1.rows[index]);
+  table2.replaceChild(row2, table2.rows[index]);
+}
+
+function appendStore(store) {
+  store.renderSales();
+  store.renderStaff();
 }
 
 // Create base sales table
@@ -191,7 +268,11 @@ function getTableTotals() {
       total += Number(number);
     }
     tH.textContent = total;
-    row.appendChild(tH);
+    if (row.cells[x]) {
+      row.replaceChild(tH, row.cells[x]);
+    } else {
+      row.appendChild(tH);
+    }
   }
 }
 
@@ -302,9 +383,8 @@ function getStaff(max) {
 }
 
 // Inputs all data from form into array
-function storeOrder() {
+function storeOrder(form) {
   const formArray = [];
-  const form = getID('orderForm');
   for (let x of form.elements) {
     if (x.nodeName === 'INPUT' && x.name) {
       formArray.push(x.value);
