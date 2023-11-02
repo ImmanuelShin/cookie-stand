@@ -21,18 +21,13 @@ function orderUp() {
       e.preventDefault();
       const storageArray = [];
       if (localStorage.getObj('pendingOrder')) {
-        const tempArray = localStorage.getObj('pendingOrder');
-        storageArray.push(tempArray);
-        for (let x of storageArray) {
-          console.log('array' + x);
-        }
+        storageArray.push(localStorage.getObj('pendingOrder'));
       }
       storageArray.push(storeOrder(form));
       localStorage.setObj('pendingOrder', storageArray);
-      // localStorage.clear();
+      form.reset();
     });
   }
-  form.reset();
   if (pending) {
     listOrders();
   }
@@ -126,9 +121,7 @@ function getStoreForm() {
 // Accepts array as argument
 // Inputs form array values into newStore object and returns newStore
 function createStore(form) {
-  console.log(form);
   const newStore =  new Store(form[0], 'NA', 'NA', 'NA', form[1], form[2], form[3]);
-  console.log(newStore);
   return newStore;
 }
 
@@ -410,27 +403,62 @@ function storeOrder(form) {
       formArray.push(x.value);
     }
   }
-  console.log(formArray);
   return formArray;
 }
 
+let organizedArray = [];
 // Takes array from localStorage and prints to order-processing.html
 function listOrders() {
   const ul = getID('pendingList');
-  const li = cEl('li');
-  li.setAttribute('class', 'pendingItem');
-  ul.append(li);
 
-  const array = localStorage.getObj('pendingOrder');
-  console.log(array[0]);
-  for (let x of array) {
-    console.log((x));
-    let p = cEl('p');
-    for (let i of x) {
-      p.textContent += i + ', ';
-      li.append(p);
+  let array = localStorage.getObj('pendingOrder');
+  // localStorage.removeItem('pendingOrder');
+  array = array.flat(Infinity);
+  let tempArray = [];
+  let i = 0;
+  for (let x in array) {
+    if (i === 5) {
+      organizedArray.push(tempArray);
+      tempArray = [];
+      i = 0;
+    } else {
+      tempArray.push(array[x]);
+      i++;
     }
   }
+
+  let z = 0;
+  for (let x of organizedArray) {
+    const li = cEl('li');
+    li.setAttribute('class', 'pendingItem');
+    li.setAttribute('id', 'pending' + z);
+    ul.append(li);
+    let p = cEl('p');
+    p.textContent = 'Name: ' + x[0] + ' | Address: ' + x[1] + ' | Product: ' + x[2] + ' | Amount: ' + x[3] + ' | Instructions: ' + x[4];
+    li.append(p);
+    const button = cEl('button');
+    button.setAttribute('class', 'fillButton');
+    button.textContent = 'Fill Order';
+    button.addEventListener('click', fillOrder);
+    li.append(button);
+    z++;
+  }
+}
+
+function fillOrder() {
+  const fill = getID('filledList');
+  const pend = getID('pendingList');
+
+  const li = this.parentElement;
+  let id = li.id;
+  id = id.match(/\d+/g);
+  li.removeChild(li.lastChild);
+
+  pend.removeChild(li);
+  fill.appendChild(li);
+
+  organizedArray.splice(Number(id), 1);
+  localStorage.setObj('pendingOrder', organizedArray);
 }
 
 // Add localStorage method to pass objects
