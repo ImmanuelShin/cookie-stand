@@ -151,17 +151,22 @@ h3 {
     border: thin black solid;
     padding: 1em;
     width: 80vw;
-    height: 5vh;
+    height: 7vh;
 }
 
-#storeForm fieldset h3{
-    margin-bottom: 0.5em;
+#storeForm fieldset div{
+    display: flex;
+    justify-content: center;
 }
 
 .storeFormInput {
     display: inline;
     padding: 1em;
     margin-top: 1em;
+}
+
+.storeFormInput * {
+    margin: 0 0.5em 0 0.5em;
 }
 
 .tableSection {

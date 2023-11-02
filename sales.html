@@ -32,24 +32,26 @@
                 <form id="storeForm">
                     <fieldset>
                         <h3>Please enter store information</h3>
-                        <div class="storeFormInput">
-                            <label for="storeName">Name</label>
-                            <input type="text" id="storeName" name="storeName">
-                        </div>
-                        <div class="storeFormInput">
-                            <label for="storeMin">Minimum Daily Customers</label>
-                            <input type="text" id="storeMin" name="storeMin">
-                        </div>
-                        <div class="storeFormInput">
-                            <label for="storeMax">Maximum Daily Customers</label>
-                            <input type="text" id="storeMax" name="storeMax">
-                        </div>
-                        <div class="storeFormInput">
-                            <label for="storeAverage">Average Cookies per Customer</label>
-                            <input type="text" id="storeAverage" name="storeAverage">
-                        </div>
-                        <div class="storeFormInput">
-                            <input type="submit" id="storeSubmit" name="storeSubmit" value="Add Store">
+                        <div> 
+                            <div class="storeFormInput">
+                                <label for="storeName">Name</label>
+                                <input type="text" id="storeName" name="storeName">
+                            </div>
+                            <div class="storeFormInput">
+                                <label for="storeMin">Minimum Daily Customers</label>
+                                <input type="number" id="storeMin" name="storeMin" min="1" max="500">
+                            </div>
+                            <div class="storeFormInput">
+                                <label for="storeMax">Maximum Daily Customers</label>
+                                <input type="number" id="storeMax" name="storeMax" min='1' max="500">
+                            </div>
+                            <div class="storeFormInput">
+                                <label for="storeAverage">Average Cookies per Customer</label>
+                                <input type="number" id="storeAverage" name="storeAverage" min="1">
+                            </div>
+                            <div class="storeFormInput">
+                                <input type="submit" id="storeSubmit" name="storeSubmit" value="Add Store">
+                            </div>
                         </div>
                     </fieldset>
                 </form>
