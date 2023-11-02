@@ -38,7 +38,7 @@ function orderUp() {
 // Changes states if check box is checked and keeps checked information in local storage
 // Calls updateColors at all points to ensure state synced across pages.
 function lightDark() {
-  const checkbox = getID('checkbox');
+  const checkbox = getID('checkBox');
 
   checkbox.addEventListener('change', function() {
     localStorage.setItem('checkboxStatus', checkbox.checked);
@@ -55,7 +55,7 @@ function lightDark() {
 
 // Function to update specified colors based on checkbox state
 function updateColors() {
-  const checkbox = getID('checkbox');
+  const checkbox = getID('checkBox');
   const body = document.body;
 
   if (checkbox.checked) {
