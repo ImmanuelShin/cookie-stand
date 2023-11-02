@@ -9,8 +9,9 @@ const lima = new Store('Lima', '6am - 7pm', '555-555-5555', 'Ca. Gral. Borgoño 
 
 const storeArray = [seattle, tokyo, dubai, paris, lima];
 
-
-
+// Finds #orderForm's submit input and adds event listener
+// Sends order to local storage if order exists
+// Checks if on order-processing.html. Calls listOrders() if true
 function orderUp() {
   const submit = getID('orderSubmit');
   const pending = getID('pendingOrders');
@@ -85,6 +86,11 @@ function printFunctions() {
   }
 }
 
+// Adds event listener to #storeForm's submit input
+// Creates new Store object from form
+// Calls replaceStore() if newStore.name matches a name in saleTable
+// Calls appendStore() if not
+// Calls getTableTotals() to recalculate daily totals based off new store information
 function getStoreForm() {
   const form = getID('storeForm');
   const submit = getID('storeSubmit');
@@ -112,6 +118,9 @@ function getStoreForm() {
   });
 }
 
+// Creates new Store object.
+// Accepts array as argument
+// Inputs form array values into newStore object and returns newStore
 function createStore(form) {
   console.log(form);
   const newStore =  new Store(form[0], 'NA', 'NA', 'NA', form[1], form[2], form[3]);
@@ -119,6 +128,10 @@ function createStore(form) {
   return newStore;
 }
 
+// Creates new table row and replaces old table row
+// Takes store object and index as arguments.
+// Creates new row with store values.
+// Replaces row at index with new row.
 function replaceStore(store, index) {
   const table1 = getID('saleTable');
   const table2 = getID('staffTable');
@@ -155,6 +168,8 @@ function replaceStore(store, index) {
   table2.replaceChild(row2, table2.rows[index]);
 }
 
+// Takes new Store and calls render functions
+// AKA prints store info to tables.
 function appendStore(store) {
   store.renderSales();
   store.renderStaff();
@@ -366,6 +381,7 @@ function getCookies(max, average) {
   return cookies;
 }
 
+// Get minimum # of staff required at each hour.
 function getStaff(max) {
   const traffic = [0.5, 0.75, 1.0, 0.6, 0.8, 1.0, 0.7, 0.4, 0.6, 0.9, 0.7, 0.5, 0.3, 0.4];
   const staff = [];
@@ -394,6 +410,7 @@ function storeOrder(form) {
   return formArray;
 }
 
+// Takes array from localStorage and prints to order-processing.html
 function listOrders() {
   const ul = getID('pendingList');
   const li = cEl('li');
@@ -412,10 +429,14 @@ function listOrders() {
   }
 }
 
+// Add localStorage method to pass objects
+// Just translates arrays or objects into JSON
 Storage.prototype.setObj = function(key, obj) {
   return this.setItem(key, JSON.stringify(obj));
 };
 
+// New method to get objects
+// Translates JSON back into object
 Storage.prototype.getObj = function(key) {
   return JSON.parse(this.getItem(key));
 };
