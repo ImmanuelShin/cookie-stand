@@ -9,6 +9,23 @@ const lima = new Store('Lima', '6am - 7pm', '555-555-5555', 'Ca. Gral. Borgoño 
 
 const storeArray = [seattle, tokyo, dubai, paris, lima];
 
+const storageArray = [];
+
+function orderUp() {
+  const submit = getID('orderSubmit');
+  const pending = getID('pendingOrders');
+  if (submit) {
+    submit.addEventListener('click', function(e) {
+      e.preventDefault();
+      storageArray.push(storeOrder());
+      localStorage.setObj('pendingOrder', storageArray);
+    });
+  }
+  if (pending) {
+    listOrders();
+  }
+}
+
 // Function to contain light dark switcher
 // Sets up event listener for check box
 // Changes states if check box is checked and keeps checked information in local storage
@@ -43,12 +60,18 @@ function updateColors() {
   }
 }
 
-// Run tables
-function runTables() {
-  createSalesTable();
-  createStaffTable();
-  renderStores();
-  getTableTotals();
+// Runs all the functions that print to html pages
+// Checks if pages are loaded before running appropriate functions
+function printFunctions() {
+  if (getID('tables')){
+    createSalesTable();
+    createStaffTable();
+    renderStores();
+    getTableTotals();
+  }
+  if (getID('storeInfo')){
+    informStores();
+  }
 }
 
 // Create base sales table
@@ -131,8 +154,6 @@ function createStaffTable() {
     tRH.appendChild(tH);
   }
 }
-
-
 
 // Function to print all store info. Called on index.html load
 function informStores() {
@@ -245,8 +266,6 @@ Store.prototype.inform = function() {
   ul.append(liLocation);
 };
 
-
-
 // Get # of cookies. Generates a random number of customers and multiplies them by average cookies per customer.
 function getCookies(max, average) {
   const traffic = [0.5, 0.75, 1.0, 0.6, 0.8, 1.0, 0.7, 0.4, 0.6, 0.9, 0.7, 0.5, 0.3, 0.4];
@@ -273,6 +292,45 @@ function getStaff(max) {
   return staff;
 }
 
+// Inputs all data from form into array
+function storeOrder() {
+  const formArray = [];
+  const form = getID('orderForm');
+  for (let x of form.elements) {
+    if (x.nodeName === 'INPUT' && x.name) {
+      formArray.push(x.value);
+    }
+  }
+  console.log(formArray);
+  return formArray;
+}
+
+function listOrders() {
+  const ul = getID('pendingList');
+  const li = cEl('li');
+  li.setAttribute('class', 'pendingItem');
+  ul.append(li);
+
+  const array = localStorage.getObj('pendingOrder');
+  console.log(array[0]);
+  for (let x of array) {
+    console.log((x));
+    let p = cEl('p');
+    for (let i of x) {
+      p.textContent += i + ', ';
+      li.append(p);
+    }
+  }
+}
+
+Storage.prototype.setObj = function(key, obj) {
+  return this.setItem(key, JSON.stringify(obj));
+};
+
+Storage.prototype.getObj = function(key) {
+  return JSON.parse(this.getItem(key));
+};
+
 // Repetitive get ID function
 function getID(element) {
   return document.getElementById(element);
@@ -285,3 +343,6 @@ function cEl(element) {
 
 // Last calls
 lightDark();
+printFunctions();
+orderUp();
+
