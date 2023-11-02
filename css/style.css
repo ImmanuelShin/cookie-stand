@@ -231,6 +231,17 @@ table th, table td {
     border-style: none;
 }
 
+#orderStatusArticle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#orderStatusArticle section {
+    text-align: center;
+    margin: 5vh;
+}
+
 footer {
     background-color: lightgray;
     color: black;
