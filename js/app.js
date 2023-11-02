@@ -9,7 +9,7 @@ const lima = new Store('Lima', '6am - 7pm', '555-555-5555', 'Ca. Gral. Borgoño 
 
 const storeArray = [seattle, tokyo, dubai, paris, lima];
 
-const storageArray = [];
+
 
 function orderUp() {
   const submit = getID('orderSubmit');
@@ -17,8 +17,17 @@ function orderUp() {
   if (submit) {
     submit.addEventListener('click', function(e) {
       e.preventDefault();
+      const storageArray = [];
+      if (localStorage.getObj('pendingOrder')) {
+        const tempArray = localStorage.getObj('pendingOrder');
+        storageArray.push(tempArray);
+        for (let x of storageArray) {
+          console.log('array' + x);
+        }
+      }
       storageArray.push(storeOrder());
       localStorage.setObj('pendingOrder', storageArray);
+      // localStorage.clear();
     });
   }
   if (pending) {
