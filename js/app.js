@@ -32,6 +32,7 @@ function orderUp() {
       // localStorage.clear();
     });
   }
+  form.reset();
   if (pending) {
     listOrders();
   }
@@ -97,6 +98,9 @@ function getStoreForm() {
   submit.addEventListener('click', function(e) {
     e.preventDefault();
     const array = storeOrder(form);
+
+    form.reset();
+
     const newStore = createStore(array);
 
     const table = getID('saleTable');
