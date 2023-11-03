@@ -202,9 +202,9 @@ table th, table td {
 
 #orderFormArticle {
     width: 50vw;
-    height: 50vh;
+    height: 75vh;
     margin: auto;
-    margin-top: 15vh;
+    margin-top: 10vh;
     margin-bottom: 15vh;
     display: flex;
     justify-content: right;
@@ -217,6 +217,20 @@ table th, table td {
 #orderFormArticle img {
     width: 50%;
     height: 50%;
+    overflow-x: hidden;
+}
+
+#orderFormArticle section {
+    display: flex;
+    flex-direction: column;
+    height: 75%;
+    overflow: scroll;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+}
+
+#orderFormArticle section::-webkit-scrollbar {
+    display: none;
 }
 
 #orderFormArticle form {
@@ -224,11 +238,15 @@ table th, table td {
 }
 
 #orderFormArticle h2 {
-    margin: 2.5em 0 2.5em 0;
+    text-align: center;
 }
 
 .formInput {
     margin: 1em 0 1em 0;
+}
+
+#orderForm {
+    height: 50%;
 }
 
 #orderSubmit {
