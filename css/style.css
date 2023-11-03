@@ -116,7 +116,6 @@ h3 {
 #bigFish {
     display: flex;
     justify-content: center;
-    border-bottom: solid thin black;
 }
 
 #bigFish img {
