@@ -413,14 +413,14 @@ let organizedArray = [];
 // Takes array from localStorage and prints to order-processing.html
 function listOrders() {
   const ul = getID('pendingList');
-
   let array = localStorage.getObj('pendingOrder');
-  // localStorage.removeItem('pendingOrder');
   array = array.flat(Infinity);
+  array = array.filter(a => (String(a) !== 'Order Now'));
   let tempArray = [];
   let i = 0;
   for (let x in array) {
-    if (i === 5) {
+    if (i === 4) {
+      tempArray.push(array[x]);
       organizedArray.push(tempArray);
       tempArray = [];
       i = 0;
@@ -464,7 +464,8 @@ function fillOrder() {
   fill.appendChild(li);
 
   organizedArray.splice(Number(id), 1);
-  localStorage.setObj('pendingOrder', organizedArray);
+  let tempArray = organizedArray.flat(Infinity);
+  localStorage.setObj('pendingOrder', tempArray);
 }
 
 // Add localStorage method to pass objects
