@@ -12,3 +12,6 @@ Lab 08;
 
 Lab 09:
 ![Google lighthouse score](img/accessibilityScore09.png)
+
+Lab 10:
+![Google lighthouse score](img/accessibilityScore10.png)
