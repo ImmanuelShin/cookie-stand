@@ -24,6 +24,7 @@ function orderUp() {
         storageArray.push(localStorage.getObj('pendingOrder'));
       }
       storageArray.push(storeOrder(form));
+      console.log(storageArray);
       localStorage.setObj('pendingOrder', storageArray);
       form.reset();
     });
@@ -399,7 +400,7 @@ function getStaff(max) {
 function storeOrder(form) {
   const formArray = [];
   for (let x of form.elements) {
-    if (x.nodeName === 'INPUT' && x.name) {
+    if ((x.nodeName === 'INPUT' || x.nodeName === 'SELECT') && x.name) {
       formArray.push(x.value);
     }
   }
@@ -418,6 +419,7 @@ function listOrders() {
   array = array.filter(a => (String(a) !== 'Order Now'));
   let tempArray = [];
   let i = 0;
+  console.log(array);
   for (let x in array) {
     if (i === 4) {
       tempArray.push(array[x]);
