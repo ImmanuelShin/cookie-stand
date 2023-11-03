@@ -93,7 +93,7 @@ input:checked + .slider:before {
 }
 
 main {
-    height: 100vh;
+    height: max-content;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -151,7 +151,9 @@ h3 {
     border: thin black solid;
     padding: 1em;
     width: 80vw;
-    height: 7vh;
+    height: 6em;
+    display: flex;
+    flex-direction: column;
 }
 
 #storeForm fieldset div{
