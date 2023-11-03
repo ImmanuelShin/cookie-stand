@@ -114,6 +114,7 @@ h3 {
 }
 
 #bigFish {
+    margin-top: 3vh;
     display: flex;
     justify-content: center;
 }
